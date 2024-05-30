@@ -24,6 +24,8 @@ Features added by Luc Saffre:
   to use for specifying the publication date.
 - don't publish items whose publication datetime is in the future.
 - respect use_dirhtml option from rstgen when calculating the url
+- 20240530 add support to temporarily write
+  `ATOM <https://validator.w3.org/feed/docs/atom.html>`__ instead of RSS.
 
 
 Usage
@@ -45,5 +47,3 @@ Usage
 
        # optional options
        feed_field_name = 'date'  # default value is "Publish Date"
-
-

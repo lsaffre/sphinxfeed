@@ -14,6 +14,8 @@ from feedgen.feed import FeedEntry
 
 import rstgen
 
+USE_ATOM = True
+
 doc_trees = []  # for atelier
 
 
@@ -60,6 +62,8 @@ def create_feed_container(app):
     feed = FeedGenerator()
     feed.title(app.config.project)
     feed.link(href=app.config.feed_base_url)
+    if USE_ATOM:
+        feed.id(app.config.feed_base_url)
     feed.author(dict(name=app.config.feed_author))
     feed.description(app.config.feed_description)
 
@@ -101,6 +105,8 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
     if not rstgen.get_config_var('use_dirhtml'):
         href += ctx['file_suffix']
     item.link(href=href)
+    if USE_ATOM:
+        item.id(href)
     item.description(ctx.get('body'))
     item.published(pubDate)
 
@@ -124,7 +130,10 @@ def emit_feed(app, exc):
 
     path = os.path.join(app.builder.outdir, app.config.feed_filename)
     # print(20190315, path)
-    feed.rss_file(path)
+    if USE_ATOM:
+        feed.atom_file(path)
+    else:
+        feed.rss_file(path)
 
     return
     # LS 20180204 The following code (pickle the environment and check
