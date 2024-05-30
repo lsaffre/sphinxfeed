@@ -3,7 +3,11 @@ from setuptools import setup
 requires = ['Sphinx>=0.6', 'feedgen', 'python-dateutil']
 
 # long_desc = open('README.rst').read()
-long_desc = """This Sphinx extension is a fork of Fergus Doyle's `sphinxfeed
+long_desc = """
+
+This repository is published on https://github.com/lsaffre/sphinxfeed
+
+This Sphinx extension is a fork of Fergus Doyle's `sphinxfeed
 package <https://github.com/junkafarian/sphinxfeed>`__
 which itself is derived from Dan Mackinlay's
 `sphinxcontrib.feed
@@ -23,6 +27,8 @@ Features added by Luc Saffre:
   to use for specifying the publication date.
 - don't publish items whose publication datetime is in the future.
 - respect use_dirhtml option from rstgen when calculating the url
+- 20240530 : add support to temporarily write
+  `ATOM <https://validator.w3.org/feed/docs/atom.html>`__ instead of RSS.
 
 
 Usage

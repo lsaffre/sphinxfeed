@@ -4,6 +4,10 @@ The ``sphinxfeed`` package
 
 
 
+
+
+This repository is published on https://github.com/lsaffre/sphinxfeed
+
 This Sphinx extension is a fork of Fergus Doyle's `sphinxfeed
 package <https://github.com/junkafarian/sphinxfeed>`__
 which itself is derived from Dan Mackinlay's
@@ -24,7 +28,7 @@ Features added by Luc Saffre:
   to use for specifying the publication date.
 - don't publish items whose publication datetime is in the future.
 - respect use_dirhtml option from rstgen when calculating the url
-- 20240530 add support to temporarily write
+- 20240530 : add support to temporarily write
   `ATOM <https://validator.w3.org/feed/docs/atom.html>`__ instead of RSS.
 
 
@@ -47,3 +51,5 @@ Usage
 
        # optional options
        feed_field_name = 'date'  # default value is "Publish Date"
+
+
