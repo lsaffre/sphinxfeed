@@ -112,6 +112,13 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
 
     if 'author' in metadata:
         item.author(metadata['author'])
+
+    if cat := metadata.get("category", None):
+        item.category(term=cat)
+    if tags := metadata.get("tags", None):
+        for tag in tags.split():
+            item.category(term=tag)
+
     env.feed_items[pagename] = item
 
     #Additionally, we might like to provide our templates with a way to link to the rss output file
