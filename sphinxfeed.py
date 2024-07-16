@@ -15,8 +15,6 @@ from feedgen.feed import FeedEntry
 
 import rstgen
 
-USE_ATOM = True
-
 doc_trees = []  # for atelier
 logger = getLogger(__name__)
 
@@ -49,6 +47,7 @@ def setup(app):
     app.add_config_value('feed_author', '', 'html')
     app.add_config_value('feed_field_name', 'Publish Date', 'env')
     app.add_config_value('feed_filename', 'rss.xml', 'html')
+    app.add_config_value('feed_use_atom', False, 'html')
     # app.add_config_value('use_dirhtml', False, 'html')
 
     app.connect('html-page-context', create_feed_item)
@@ -64,7 +63,7 @@ def create_feed_container(app):
     feed = FeedGenerator()
     feed.title(app.config.project)
     feed.link(href=app.config.feed_base_url)
-    if USE_ATOM:
+    if app.config.feed_use_atom:
         feed.id(app.config.feed_base_url)
     feed.author({'name': app.config.feed_author})
     feed.description(app.config.feed_description)
@@ -107,7 +106,7 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
     if not rstgen.get_config_var('use_dirhtml'):
         href += ctx['file_suffix']
     item.link(href=href)
-    if USE_ATOM:
+    if app.config.feed_use_atom:
         item.id(href)
     item.description(ctx.get('body'))
     item.published(pubDate)
@@ -143,8 +142,9 @@ def emit_feed(app, exc):
         #     getattr(e, k)(v)
 
     path = os.path.join(app.builder.outdir, app.config.feed_filename)
+
     # print(20190315, path)
-    if USE_ATOM:
+    if app.config.feed_use_atom:
         feed.atom_file(path)
     else:
         feed.rss_file(path)
