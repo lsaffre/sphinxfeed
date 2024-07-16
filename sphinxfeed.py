@@ -8,6 +8,7 @@ import os.path
 import time
 from datetime import datetime
 from dateutil.tz import tzlocal
+from logging import getLogger
 
 from feedgen.feed import FeedGenerator
 from feedgen.feed import FeedEntry
@@ -17,6 +18,7 @@ import rstgen
 USE_ATOM = True
 
 doc_trees = []  # for atelier
+logger = getLogger(__name__)
 
 
 def parse_pubdate(pubdate):
@@ -90,7 +92,7 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
     pubDate = parse_pubdate(pubDate)
 
     if pubDate > time.localtime():
-        # raise Exception("20200131 {} > {}".format(pubDate, time.gmtime()))
+        logger.warning("Skipping %s, publish date is in the future: %s", pagename, pubDate)
         return
 
     if not ctx.get('body') or not ctx.get('title'):
