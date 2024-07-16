@@ -66,7 +66,7 @@ def create_feed_container(app):
     feed.link(href=app.config.feed_base_url)
     if USE_ATOM:
         feed.id(app.config.feed_base_url)
-    feed.author(dict(name=app.config.feed_author))
+    feed.author({'name': app.config.feed_author})
     feed.description(app.config.feed_description)
 
     if app.config.language:
@@ -112,13 +112,18 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
     item.description(ctx.get('body'))
     item.published(pubDate)
 
-    if 'author' in metadata:
-        item.author(metadata['author'])
-
+    if author := metadata.get('author'):
+        # author may be a str (in field list/frontmatter) or a dict (expected by feedgen)
+        if isinstance (author, str):
+            author = {'name': author}
+        item.author(author)
     if cat := metadata.get("category", None):
         item.category(term=cat)
     if tags := metadata.get("tags", None):
-        for tag in tags.split():
+        # tags may be a str (in field list/frontmatter), or a list (from sphinx-tags extension)
+        if isinstance(tags, str):
+            tags = tags.split()
+        for tag in tags:
             item.category(term=tag)
 
     env.feed_items[pagename] = item
