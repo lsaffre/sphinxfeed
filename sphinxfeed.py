@@ -13,8 +13,6 @@ from logging import getLogger
 from feedgen.feed import FeedGenerator
 from feedgen.feed import FeedEntry
 
-import rstgen
-
 doc_trees = []  # for atelier
 logger = getLogger(__name__)
 
@@ -48,7 +46,7 @@ def setup(app):
     app.add_config_value('feed_field_name', 'Publish Date', 'env')
     app.add_config_value('feed_filename', 'rss.xml', 'html')
     app.add_config_value('feed_use_atom', False, 'html')
-    # app.add_config_value('use_dirhtml', False, 'html')
+    app.add_config_value('use_dirhtml', False, 'html')
 
     app.connect('html-page-context', create_feed_item)
     app.connect('build-finished', emit_feed)
@@ -103,7 +101,7 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
     item = FeedEntry()
     item.title(ctx.get('title'))
     href = app.config.feed_base_url + '/' + ctx['current_page_name']
-    if not rstgen.get_config_var('use_dirhtml'):
+    if not app.config.use_dirhtml:
         href += ctx['file_suffix']
     item.link(href=href)
     if app.config.feed_use_atom:
