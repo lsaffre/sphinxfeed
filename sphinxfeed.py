@@ -8,7 +8,7 @@ import os.path
 import time
 from datetime import datetime
 from dateutil.tz import tzlocal
-from logging import getLogger
+from sphinx.util.logging import getLogger
 
 from feedgen.feed import FeedGenerator
 from feedgen.feed import FeedEntry
