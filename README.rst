@@ -85,6 +85,4 @@ Usage
 #. Sphinxfeed will include only `.rst` file that have a ``:date:`` field with a
    date that does not lie in the future.
 
-N.B.: The README.rst file    
-
 
