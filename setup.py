@@ -16,7 +16,7 @@ instead of the defunct `feedformatter
 <http://code.google.com/p/feedformatter/>`_ package or of Django utils to
 generate the feed.
 
-Features added by Luc Saffre:
+Features added by Luc Saffre & Jason Cook:
 
 - 20190315 : Support Python 3 (by using feedgen instead of feedformatter).
   feed_description is no longer optional.
@@ -38,6 +38,10 @@ Features added by Luc Saffre:
   field is a space-separated list of tags, so each tag must be a single word.
   Both the category and each tag will become a ``<category>`` element in the
   feed item.
+
+- 20240718 : merged 7 commits with minor fixes and config updates from `pull
+  request suggested by JWCook <https://github.com/lsaffre/sphinxfeed/pull/1>`__
+
 
 Usage
 -----
@@ -61,9 +65,20 @@ Usage
 
        # optional options
        feed_field_name = 'date'  # default value is "Publish Date"
+       feed_use_atom = False
+       use_dirhtml = False
+
+#. Optionally use the following metadata fields:
+
+   - date (or any other name configured using feed_field_name)
+   - author
+   - tags
+   - category
 
 #. Sphinxfeed will include only `.rst` file that have a ``:date:`` field with a
-   data that does not lie in the future.
+   date that does not lie in the future.
+
+N.B.: The README.rst file    
 
 """
 
