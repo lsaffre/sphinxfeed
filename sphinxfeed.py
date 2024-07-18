@@ -8,15 +8,13 @@ import os.path
 import time
 from datetime import datetime
 from dateutil.tz import tzlocal
+from sphinx.util.logging import getLogger
 
 from feedgen.feed import FeedGenerator
 from feedgen.feed import FeedEntry
 
-import rstgen
-
-USE_ATOM = True
-
 doc_trees = []  # for atelier
+logger = getLogger(__name__)
 
 
 def parse_pubdate(pubdate):
@@ -47,7 +45,8 @@ def setup(app):
     app.add_config_value('feed_author', '', 'html')
     app.add_config_value('feed_field_name', 'Publish Date', 'env')
     app.add_config_value('feed_filename', 'rss.xml', 'html')
-    # app.add_config_value('use_dirhtml', False, 'html')
+    app.add_config_value('feed_use_atom', False, 'html')
+    app.add_config_value('use_dirhtml', False, 'html')
 
     app.connect('html-page-context', create_feed_item)
     app.connect('build-finished', emit_feed)
@@ -62,9 +61,9 @@ def create_feed_container(app):
     feed = FeedGenerator()
     feed.title(app.config.project)
     feed.link(href=app.config.feed_base_url)
-    if USE_ATOM:
+    if app.config.feed_use_atom:
         feed.id(app.config.feed_base_url)
-    feed.author(dict(name=app.config.feed_author))
+    feed.author({'name': app.config.feed_author})
     feed.description(app.config.feed_description)
 
     if app.config.language:
@@ -90,7 +89,7 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
     pubDate = parse_pubdate(pubDate)
 
     if pubDate > time.localtime():
-        # raise Exception("20200131 {} > {}".format(pubDate, time.gmtime()))
+        logger.warning("Skipping %s, publish date is in the future: %s", pagename, pubDate)
         return
 
     if not ctx.get('body') or not ctx.get('title'):
@@ -102,21 +101,26 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
     item = FeedEntry()
     item.title(ctx.get('title'))
     href = app.config.feed_base_url + '/' + ctx['current_page_name']
-    if not rstgen.get_config_var('use_dirhtml'):
+    if not app.config.use_dirhtml:
         href += ctx['file_suffix']
     item.link(href=href)
-    if USE_ATOM:
+    if app.config.feed_use_atom:
         item.id(href)
     item.description(ctx.get('body'))
     item.published(pubDate)
 
-    if 'author' in metadata:
-        item.author(metadata['author'])
-
+    if author := metadata.get('author'):
+        # author may be a str (in field list/frontmatter) or a dict (expected by feedgen)
+        if isinstance (author, str):
+            author = {'name': author}
+        item.author(author)
     if cat := metadata.get("category", None):
         item.category(term=cat)
     if tags := metadata.get("tags", None):
-        for tag in tags.split():
+        # tags may be a str (in field list/frontmatter), or a list (from sphinx-tags extension)
+        if isinstance(tags, str):
+            tags = tags.split()
+        for tag in tags:
             item.category(term=tag)
 
     env.feed_items[pagename] = item
@@ -136,8 +140,9 @@ def emit_feed(app, exc):
         #     getattr(e, k)(v)
 
     path = os.path.join(app.builder.outdir, app.config.feed_filename)
+
     # print(20190315, path)
-    if USE_ATOM:
+    if app.config.feed_use_atom:
         feed.atom_file(path)
     else:
         feed.rss_file(path)
