@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sphinxfeed-lsaffre"
+dynamic = ["version"]
+description = "Sphinx extension for generating RSS feeds"
+readme = "README.rst"
+license = {file = "LICENSE"}
+
+authors = [
+    { name = "Fergus Doyle", email = "fergus.doyle@largeblue.com" },
+    { name = "Luc Saffre", email = "luc@saffre-rumma.net" },
+    { name = "Jordan Cook", email = "jordan.cook.git@proton.me" },
+]
+
+maintainers = [
+    { name = "Luc Saffre", email = "luc@saffre-rumma.net" },
+]
+
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Topic :: Documentation",
+    "Topic :: Utilities",
+]
+
+dependencies = [
+    "feedgen",
+    "python-dateutil",
+    "Sphinx",
+]
+
+[project.urls]
+homepage = "https://github.com/lsaffre/sphinxfeed"
+issues = "https://github.com/lsaffre/sphinxfeed/issues"
+
+[tool.hatch.version]
+path = "sphinxfeed.py"
+
+[tool.hatch.build.targets.sdist]
+include = ["sphinxfeed.py"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["sphinxfeed"]
+
+[tool.hatch.build]
+dev-mode-dirs = ["."]
