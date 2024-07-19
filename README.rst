@@ -64,7 +64,7 @@ See also the files `LICENSE` and `CHANGELOG.rst`.
 Install a developer version::
 
   git clone https://github.com/lsaffre/sphinxfeed.git
-  pip install -e sphinxfeed
+  pip install -e ".[dev]"
 
 Run the test suite::
 
