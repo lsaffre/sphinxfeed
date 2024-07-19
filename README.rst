@@ -72,9 +72,5 @@ Run the test suite::
 
 Release a new version to PyPI::
 
-  $ python -m build
-  $ twine check --strict dist/*
-  $ twine upload dist/*
-
-The ``twine upload`` step requires authentication credentials in your
-`~/.pypirc` file.
+  $ git tag v$(hatch version)
+  $ git push --tags
