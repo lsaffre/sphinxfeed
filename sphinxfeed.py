@@ -91,7 +91,7 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
     pubDate = parse_pubdate(pubDate)
 
     if pubDate > time.localtime():
-        logger.warning("Skipping %s, publish date is in the future: %s", pagename, pubDate)
+        logger.info("Skipping %s, publish date is in the future: %s", pagename, pubDate)
         return
 
     if not ctx.get('body') or not ctx.get('title'):
