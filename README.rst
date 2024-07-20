@@ -74,3 +74,13 @@ Release a new version to PyPI::
 
   $ git tag v$(hatch version)
   $ git push --tags
+
+Manuael release to PyPI without GitHub::
+
+  $ hatch build
+  $ twine check --strict dist/*
+  $ twine upload dist/*
+
+The ``twine upload`` step requires authentication credentials in your
+`~/.pypirc` file.
+
