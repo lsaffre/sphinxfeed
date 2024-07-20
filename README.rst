@@ -72,7 +72,7 @@ Run the test suite::
 
 Release a new version to PyPI::
 
-  $ python -m build
+  $ hatch build
   $ twine check --strict dist/*
   $ twine upload dist/*
 

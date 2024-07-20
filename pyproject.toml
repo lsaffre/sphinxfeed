@@ -49,7 +49,7 @@ path = "sphinxfeed.py"
 include = ["sphinxfeed.py"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["sphinxfeed"]
+only-include = ["sphinxfeed.py"]
 
 [tool.hatch.build]
 dev-mode-dirs = ["."]
