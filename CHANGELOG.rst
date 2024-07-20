@@ -25,3 +25,10 @@ The sphinxfeed changelog
 
 - 20240718 : merged 7 commits with minor fixes and config updates from `pull
   request suggested by JWCook <https://github.com/lsaffre/sphinxfeed/pull/1>`__
+
+- 20240720 :  The message "Skipping %s, publish date is in the future" is now
+  logged at level INFO instead of WARNING because we don't want the
+  ``sphinx-build -W`` to fail in this situation.
+
+- 20240720 : Removed dependency from ``atelier`` because it's easier to call 
+  `subprocess.check_output()` directly here.

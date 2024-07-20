@@ -11,6 +11,33 @@ instead of the defunct `feedformatter
 <https://code.google.com/archive/p/feedformatter/>`_ package or of Django utils to
 generate the feed.
 
+Features added
+==============
+
+- Support Python 3 (by using feedgen instead of feedformatter).
+- Don't publish items having a publication datetime in the future.
+- Ability to write
+  `ATOM <https://validator.w3.org/feed/docs/atom.html>`__ instead of RSS.
+
+- Detect ``category`` and ``tags`` fields in the `page metadata
+  <https://www.sphinx-doc.org/en/master/usage/restructuredtext/field-lists.html>`__
+  and if either or both is present, call the `feedgen.FeedEntry.category()`
+  method to add ``<category>`` elements to the feed item.  The difference
+  between ``category`` and ``tags`` is that  the ``category`` of a blog post may
+  contain whitespace while the ``tags`` metadata field is a space-separated list
+  of tags, so each tag must be a single word. Both the category and each tag
+  will become a ``<category>`` element in the feed item.
+
+- Additional Sphinx config variables:
+
+  - ``feed_field_name`` to change the name of the
+    metadata field to use for specifying the publication date.
+
+  - ``use_dirhtml`` to specify whether `dirhtml` instead of `html` builder is
+    used when calculating the url
+
+   - ``feed_use_atom`` to generate an Atom feed instead of RSS
+
 
 Installation
 ============
@@ -83,4 +110,3 @@ Manuael release to PyPI without GitHub::
 
 The ``twine upload`` step requires authentication credentials in your
 `~/.pypirc` file.
-
