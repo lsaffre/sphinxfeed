@@ -8,6 +8,7 @@ dynamic = ["version"]
 description = "Sphinx extension for generating RSS feeds"
 readme = "README.rst"
 license = {file = "LICENSE"}
+requires-python = ">= 3.8"
 
 authors = [
     { name = "Fergus Doyle", email = "fergus.doyle@largeblue.com" },
@@ -18,7 +19,6 @@ authors = [
 maintainers = [
     { name = "Luc Saffre", email = "luc@saffre-rumma.net" },
 ]
-
 
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -36,6 +36,13 @@ dependencies = [
     "feedgen",
     "python-dateutil",
     "Sphinx",
+]
+
+[project.optional-dependencies]
+dev = [
+    "atelier",
+    "hatch",
+    "pytest",
 ]
 
 [project.urls]

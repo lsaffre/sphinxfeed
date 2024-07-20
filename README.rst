@@ -64,7 +64,7 @@ See also the files `LICENSE` and `CHANGELOG.rst`.
 Install a developer version::
 
   git clone https://github.com/lsaffre/sphinxfeed.git
-  pip install -e sphinxfeed
+  pip install -e ".[dev]"
 
 Run the test suite::
 
@@ -72,9 +72,15 @@ Run the test suite::
 
 Release a new version to PyPI::
 
+  $ git tag v$(hatch version)
+  $ git push --tags
+
+Manuael release to PyPI without GitHub::
+
   $ hatch build
   $ twine check --strict dist/*
   $ twine upload dist/*
 
 The ``twine upload`` step requires authentication credentials in your
 `~/.pypirc` file.
+
