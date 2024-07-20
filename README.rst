@@ -36,7 +36,7 @@ Features added
   - ``use_dirhtml`` to specify whether `dirhtml` instead of `html` builder is
     used when calculating the url
 
-   - ``feed_use_atom`` to generate an Atom feed instead of RSS
+  - ``feed_use_atom`` to generate an Atom feed instead of RSS
 
 
 Installation
