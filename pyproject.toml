@@ -40,7 +40,6 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "atelier",
     "hatch",
     "pytest",
 ]

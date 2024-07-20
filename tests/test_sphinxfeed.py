@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2018-2021 Rumma & Ko Ltd
+# Copyright 2018-2024 Rumma & Ko Ltd
 """
 Run a sphinx-build and then check whether the generated files (in
 `tmp`) are the same as in `expected`.
@@ -15,7 +15,8 @@ and if there is no other changes, update the expected files::
 """
 
 import filecmp
-from atelier.test import TestCase
+from unittest import TestCase
+import subprocess
 
 
 class AllTests(TestCase):
@@ -26,7 +27,7 @@ class AllTests(TestCase):
         args += ["html"]
         args += ["tests/docs1"]
         args += ["tmp"]
-        self.run_subprocess(args)
+        subprocess.check_output(args, stderr=subprocess.STDOUT)
 
         common = [
             "index.html", "first.html", "search.html", "genindex.html",
