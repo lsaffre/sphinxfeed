@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <id>http://news.example.com</id>
+    <title>First sphinxfeed tester</title>
+    <updated>2024-07-21T18:58:02.430522+00:00</updated>
+    <author>
+        <name>Joe Dow</name>
+    </author>
+    <link href="http://news.example.com"/>
+    <generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator>
+    <rights>2018 Joe Doe</rights>
+    <subtitle>Joe's blog</subtitle>
+    <entry>
+        <id>http://news.example.com/second.html</id>
+        <title>Second day</title>
+        <updated>2024-07-21T18:58:02.552860+00:00</updated>
+        <author>
+            <name>Joe</name>
+        </author>
+        <content>
+            &lt;section id="second-day"&gt;
+            &lt;h1&gt;Second day&lt;a class="headerlink" href="#second-day" title="Link to this heading"&gt;¶&lt;/a&gt;&lt;/h1&gt;
+            &lt;p&gt;Mul seitse pruuti on,
+            neid kõiki armastan
+            ja iga päev neist üht mina külastan.
+            Ikka Emma esmaspäev,
+            Terese teisipäev,&lt;/p&gt;
+            &lt;/section&gt;
+        </content>
+        <link href="http://news.example.com/second.html"/>
+        <published>2018-03-12T23:30:00+00:00</published>
+    </entry>
+    <entry>
+        <id>http://news.example.com/first.html</id>
+        <title>First day</title>
+        <updated>2024-07-21T18:58:02.488103+00:00</updated>
+        <content>
+            &lt;section id="first-day"&gt;
+            &lt;h1&gt;First day&lt;a class="headerlink" href="#first-day" title="Link to this heading"&gt;¶&lt;/a&gt;&lt;/h1&gt;
+            &lt;p&gt;Mul seitse pruuti on,
+            neid kõiki armastan
+            ja iga päev neist üht mina külastan.
+            Ikka Emma esmaspäev, …&lt;/p&gt;
+            &lt;/section&gt;
+        </content>
+        <link href="http://news.example.com/first.html"/>
+        <published>2018-03-11T00:00:00-06:00</published>
+    </entry>
+</feed>
