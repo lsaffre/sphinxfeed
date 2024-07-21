@@ -11,3 +11,4 @@ Sitemap
 
    first
    second
+   future
