@@ -71,7 +71,10 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
     if not pubdate:
         return
 
-    pubdate = parse_date(pubdate).replace(tzinfo=tzlocal())
+    # Default to local timezone, unless one is explicitly provided
+    pubdate = parse_date(pubdate)
+    if not pubdate.tzinfo:
+        pubdate = pubdate.replace(tzinfo=tzlocal())
     if pubdate > datetime.now(tzlocal()):
         logger.info("Skipping %s, publish date is in the future: %s", pagename, pubdate)
         return
