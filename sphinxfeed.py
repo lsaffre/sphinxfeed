@@ -4,7 +4,7 @@
 See https://github.com/lsaffre/sphinxfeed
 """
 
-__version__ = '0.3.3'
+__version__ = '0.3.4'
 
 import os.path
 import time
