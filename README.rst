@@ -1,6 +1,15 @@
 ==========================
 The ``sphinxfeed`` package
 ==========================
+.. image:: https://img.shields.io/github/actions/workflow/status/lsaffre/sphinxfeed/build.yml
+  :alt: Build status
+  :target: https://github.com/lsaffre/sphinxfeed/actions
+.. image:: https://img.shields.io/pypi/v/sphinxfeed-lsaffre?color=blue
+  :alt: PyPI - package version
+  :target: https://pypi.org/project/sphinxfeed-lsaffre
+.. image:: https://img.shields.io/pypi/pyversions/sphinxfeed-lsaffre
+  :alt: PyPI - supported python versions
+  :target: https://pypi.org/project/sphinxfeed-lsaffre
 
 This Sphinx extension is a fork of Fergus Doyle's `sphinxfeed package
 <https://github.com/junkafarian/sphinxfeed>`__ which itself is derived from Dan
@@ -42,7 +51,7 @@ Features added
 Installation
 ============
 
-Soon you can install it using pip::
+You can install it using pip::
 
   pip install sphinxfeed-lsaffre
 
