@@ -99,10 +99,15 @@ Run the test suite::
 
 Release a new version to PyPI::
 
+  $ hatch version micro
+  $ git commit -m "release to pypi"
   $ git tag v$(hatch version)
   $ git push --tags
 
-Manuael release to PyPI without GitHub::
+See `Hatch Versioning <https://hatch.pypa.io/1.8/version/>`__. and  `Publishing
+to PyPI with a Trusted Publisher <https://docs.pypi.org/trusted-publishers/>`__.
+
+Manually release to PyPI using your machine and token::
 
   $ hatch build
   $ twine check --strict dist/*
