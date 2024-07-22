@@ -7,6 +7,7 @@ language = 'en'
 html_title = "Joe's website"
 html_short_title = u"Home"
 html_last_updated_fmt = '%Y-%m-%d'
+use_dirhtml = True
 
 # Sphinxfeed config
 extensions = ['sphinxfeed']
