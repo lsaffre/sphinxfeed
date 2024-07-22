@@ -106,6 +106,11 @@ Run the test suite::
 
   $ pytest
 
+Generate an HTML test coverage report::
+
+  $ pytest --cov-report=html
+  $ python -m webbrowser test-reports/index.html
+
 Release a new version to PyPI::
 
   $ hatch version micro
