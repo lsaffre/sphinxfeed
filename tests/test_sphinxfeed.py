@@ -65,7 +65,8 @@ def _compare_rss_feeds(file_1: Path, file_2: Path):
     # Compare all feed items
     feed_items_1 = feed_contents_1.findall("item")
     feed_items_2 = feed_contents_2.findall("item")
-    for item_1, item_2 in zip(feed_items_1, feed_items_2, strict=True):
+    assert len(feed_items_1) == len(feed_items_2)
+    for item_1, item_2 in zip(feed_items_1, feed_items_2):
         for attr in RSS_ITEM_ATTRIBUTES:
             _compare_attrs(attr, item_1, item_2)
 
@@ -91,7 +92,8 @@ def _compare_atom_feeds(file_1: Path, file_2: Path):
     # Compare all feed items
     feed_items_1 = feed_contents_1.findall(f"{{{ATOM_SCHEMA}}}entry")
     feed_items_2 = feed_contents_2.findall(f"{{{ATOM_SCHEMA}}}entry")
-    for entry_1, entry_2 in zip(feed_items_1, feed_items_2, strict=True):
+    assert len(feed_items_1) == len(feed_items_2)
+    for entry_1, entry_2 in zip(feed_items_1, feed_items_2):
         for attr in ATOM_ITEM_ATTRIBUTES:
             _compare_attrs(attr, entry_1, entry_2, atom=True)
 
@@ -124,6 +126,9 @@ def _compare_attrs(attr: str, e1: Element, e2: Element, atom: bool = False):
     else:
         text_1 = dedent(val_1.text).strip()
         text_2 = dedent(val_2.text).strip()
+    # Handle different phrasing in Sphinx <=7.1
+    text_1 = text_1.replace('Permalink', 'Link')
+    text_2 = text_2.replace('Permalink', 'Link')
 
     print(f"  expected: {text_1}\n  actual: {text_2}")
     assert text_1 == text_2

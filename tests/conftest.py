@@ -14,6 +14,8 @@ Notes on testing setup:
 from pathlib import Path
 
 import pytest
+# Required for python 3.8 / Sphinx <=7.1 support; later versions support pathlib.Path
+from sphinx.testing.path import path as SphinxPath
 
 collect_ignore = ["sources", "outputs"]
 pytest_plugins = "sphinx.testing.fixtures"
@@ -25,4 +27,4 @@ SOURCE_DIR = Path(__file__).parent.resolve() / "sources"
 @pytest.fixture(scope="session")
 def rootdir():
     """This fixture overrides the root directory used by SphinxTestApp."""
-    yield Path(SOURCE_DIR)
+    yield SphinxPath(SOURCE_DIR)
