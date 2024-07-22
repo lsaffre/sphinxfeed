@@ -3,14 +3,15 @@
 Runs sphinx builds using SphinxTestApp to generate RSS and Atom feeds, and compares them to expected
 output one element at a time. Shows detailed output on failure.
 """
-
 from io import StringIO
 from pathlib import Path
 from textwrap import dedent
+from unittest.mock import patch
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
 import pytest
+from dateutil.tz import UTC
 from sphinx.testing.util import SphinxTestApp
 
 from tests.conftest import OUTPUT_DIR
@@ -45,7 +46,8 @@ ATOM_ITEM_ATTRIBUTES = [
 
 
 @pytest.mark.sphinx("html", testroot="rss")
-def test_build_rss(app: SphinxTestApp, status: StringIO):
+@patch("sphinxfeed.tzlocal", return_value=UTC)
+def test_build_rss(mock_tzlocal, app: SphinxTestApp, status: StringIO):
     app.build(force_all=True)
     assert "build succeeded" in status.getvalue()
 
@@ -72,7 +74,8 @@ def _compare_rss_feeds(file_1: Path, file_2: Path):
 
 
 @pytest.mark.sphinx("html", testroot="atom")
-def test_build_atom(app: SphinxTestApp, status: StringIO):
+@patch("sphinxfeed.tzlocal", return_value=UTC)
+def test_build_atom(mock_tzlocal, app: SphinxTestApp, status: StringIO):
     app.build(force_all=True)
     assert "build succeeded" in status.getvalue()
 

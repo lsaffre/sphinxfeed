@@ -44,6 +44,6 @@
             &lt;/section&gt;
         </content>
         <link href="http://news.example.com/first.html"/>
-        <published>2018-03-11T00:00:00-06:00</published>
+        <published>2018-03-11T00:00:00+00:00</published>
     </entry>
 </feed>
