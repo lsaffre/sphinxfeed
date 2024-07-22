@@ -32,3 +32,6 @@ The sphinxfeed changelog
 
 - 20240720 : Removed dependency from ``atelier`` because it's easier to call 
   `subprocess.check_output()` directly here.
+
+- 20240722 : Support additional timestamp formats (any format supported by
+  `dateutil <https://dateutil.readthedocs.io/en/stable/examples.html#parse-examples>`__)

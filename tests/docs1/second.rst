@@ -1,4 +1,4 @@
-:date: 2018-03-12
+:date: March 12 2018, 11:30 PM UTC
 :author: Joe
 
 ==========
