@@ -11,11 +11,10 @@ Notes on testing setup:
 * Test build output is located under `/tmp/pytest*`
 """
 
+import shutil
 from pathlib import Path
 
 import pytest
-# Required for python 3.8 / Sphinx <=7.1 support; later versions support pathlib.Path
-from sphinx.testing.path import path as SphinxPath
 
 collect_ignore = ["sources", "outputs"]
 pytest_plugins = "sphinx.testing.fixtures"
@@ -26,5 +25,15 @@ SOURCE_DIR = Path(__file__).parent.resolve() / "sources"
 
 @pytest.fixture(scope="session")
 def rootdir():
-    """This fixture overrides the root directory used by SphinxTestApp."""
-    yield SphinxPath(SOURCE_DIR)
+    """This fixture overrides the root directory used by SphinxTestApp. Also patches in a
+    Path.copytree() method for compatibility with sphinx.testing.path.path in older Sphinx versions.
+    """
+
+    class PatchedPath(type(Path())):
+        def __new__(cls, *args):
+            return super().__new__(cls, *args)
+
+        def copytree(src, dest):
+            shutil.copytree(src, dest, symlinks=True)
+
+    yield PatchedPath(SOURCE_DIR)
