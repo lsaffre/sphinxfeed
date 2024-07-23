@@ -48,6 +48,7 @@ dependencies = [
 dev = [
     "hatch",
     "pytest",
+    "pytest-cov",
 ]
 
 [project.urls]
@@ -65,3 +66,15 @@ only-include = ["sphinxfeed.py"]
 
 [tool.hatch.build]
 dev-mode-dirs = ["."]
+
+# Coverage report config: by default, show condensed terminal output
+[tool.coverage.run]
+branch = true
+source = ['.']
+omit = ['tests/*', 'tasks.py']
+
+[tool.coverage.html]
+directory = 'test-reports'
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report=term"

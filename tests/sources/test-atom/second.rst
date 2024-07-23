@@ -1,10 +1,11 @@
 :date: March 12 2018, 11:30 PM UTC
 :author: Joe
+:tags: poetry, unit-test
 
 ==========
 Second day
 ==========
-.. tags:: poetry, unit-test
+
 
 Mul seitse pruuti on,
 neid kõiki armastan

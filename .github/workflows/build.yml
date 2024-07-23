@@ -27,9 +27,7 @@ jobs:
           pip install -U pip setuptools
           pip install -e .[dev]
       - name: Run tests
-        run: pytest -v tests || diff tmp/ tests/docs1/expected && exit 1
-        # Remove this line once tests are updated to work in CI:
-        continue-on-error: true
+        run: pytest -vs tests
 
   # For git tags, build and publish package to PyPI
   publish:

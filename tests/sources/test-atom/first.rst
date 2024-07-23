@@ -1,4 +1,5 @@
 :date: 2018-03-11
+:category: test
 
 =========
 First day
