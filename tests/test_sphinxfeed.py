@@ -16,7 +16,6 @@ from sphinx.testing.util import SphinxTestApp
 
 from tests.conftest import OUTPUT_DIR
 
-RSS_ITEM_ATTRIBUTES = ["title", "link", "description", "pubDate"]
 RSS_META_ATTRIBUTES = [
     "copyright",
     "description",
@@ -25,6 +24,13 @@ RSS_META_ATTRIBUTES = [
     "language",
     "link",
     "title",
+]
+RSS_ITEM_ATTRIBUTES = [
+    "guid",
+    "title",
+    "link",
+    "description",
+    "pubDate",
 ]
 
 ATOM_SCHEMA = "http://www.w3.org/2005/Atom"

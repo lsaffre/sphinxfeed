@@ -13,6 +13,7 @@
         <item>
             <title>Second day</title>
             <link>http://news.example.com/second.html</link>
+            <guid>65a78116-5715-4f78-bbd4-384a018c99f9</guid>
             <description>
             &lt;section id="second-day"&gt;
             &lt;h1&gt;Second day&lt;a class="headerlink" href="#second-day" title="Link to this heading"&gt;¶&lt;/a&gt;&lt;/h1&gt;
@@ -28,6 +29,7 @@
         <item>
             <title>First day</title>
             <link>http://news.example.com/first.html</link>
+            <guid>f21329fa-c178-5550-9bbd-8cd2f591844a</guid>
             <description>
             &lt;section id="first-day"&gt;
             &lt;h1&gt;First day&lt;a class="headerlink" href="#first-day" title="Link to this heading"&gt;¶&lt;/a&gt;&lt;/h1&gt;
