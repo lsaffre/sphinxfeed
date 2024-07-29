@@ -4,7 +4,7 @@
 See https://github.com/lsaffre/sphinxfeed
 """
 
-__version__ = '0.3.5'
+__version__ = '0.3.6'
 
 import os.path
 from datetime import datetime
