@@ -45,7 +45,13 @@ Features added
   - ``use_dirhtml`` to specify whether `dirhtml` instead of `html` builder is
     used when calculating the url
 
-  - ``feed_entry_permalink`` to set a permalink GUID for each feed entry
+  - ``feed_entry_permalink`` to set a `permalink GUID
+    <https://python-feedgen.readthedocs.io/en/latest/api.entry.html#feedgen.entry.FeedEntry.guid>`__
+    for each feed entry. GUIDs are generated based on the entry URL. Or if a
+    ``guid`` value is found in page metadata, that will be used instead. For
+    example, so it can be manually set if the URL changes. Defaults to `False`,
+    in which case the entry URL will be used as a non-permalink ID. Applies to
+    both Atom and RSS feeds.
 
   - ``feed_use_atom`` to generate an Atom feed instead of RSS
 
@@ -87,6 +93,7 @@ Usage
 
    - date (or any other name configured using feed_field_name)
    - author
+   - guid
    - tags
    - category
 
