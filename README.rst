@@ -116,7 +116,7 @@ Generate an HTML test coverage report::
 Release a new version to PyPI::
 
   $ hatch version micro
-  $ git commit -m "release to pypi"
+  $ git commit -am "release to pypi"
   $ git tag v$(hatch version)
   $ git push --tags
 
