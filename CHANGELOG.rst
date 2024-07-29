@@ -30,8 +30,14 @@ The sphinxfeed changelog
   logged at level INFO instead of WARNING because we don't want the
   ``sphinx-build -W`` to fail in this situation.
 
-- 20240720 : Removed dependency from ``atelier`` because it's easier to call 
+- 20240720 : Removed dependency from ``atelier`` because it's easier to call
   `subprocess.check_output()` directly here.
 
 - 20240722 : Support additional timestamp formats (any format supported by
   `dateutil <https://dateutil.readthedocs.io/en/stable/examples.html#parse-examples>`__)
+
+- 20240728: Add ``feed_entry_permalink`` option to set a permalink GUID for each
+  feed entry. If a `guid` value is found in the metadata, that will be used;
+  otherwise, a new one will be generated based on the entry URL.
+  Defaults to ``False``, in which case the entry URL will be used as a
+  non-permalink ID.  Applies to both Atom and RSS feeds.

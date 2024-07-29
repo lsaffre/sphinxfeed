@@ -8,12 +8,13 @@ __version__ = '0.3.5'
 
 import os.path
 from datetime import datetime
-from dateutil.tz import tzlocal
+from uuid import NAMESPACE_URL, uuid5
+
 from dateutil.parser import parse as parse_date
+from dateutil.tz import tzlocal
+from feedgen.feed import FeedEntry, FeedGenerator
 from sphinx.util.logging import getLogger
 
-from feedgen.feed import FeedGenerator
-from feedgen.feed import FeedEntry
 
 doc_trees = []  # for atelier
 logger = getLogger(__name__)
@@ -30,6 +31,7 @@ def setup(app):
     app.add_config_value('feed_author', '', 'html')
     app.add_config_value('feed_field_name', 'Publish Date', 'env')
     app.add_config_value('feed_filename', 'rss.xml', 'html')
+    app.add_config_value('feed_entry_permalink', False, 'html')
     app.add_config_value('feed_use_atom', False, 'html')
     app.add_config_value('use_dirhtml', False, 'html')
 
@@ -87,10 +89,17 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
     if not app.config.use_dirhtml:
         href += ctx['file_suffix']
     item.link(href=href)
-    if app.config.feed_use_atom:
-        item.id(href)
     item.description(ctx.get('body'))
     item.published(pubdate)
+
+    # Entry ID option 1: Use a GUID as a permalink. Also sets item.id for Atom.
+    if app.config.feed_entry_permalink:
+        if not (guid :=  metadata.get('guid')):
+            guid = uuid5(NAMESPACE_URL, href)
+        item.guid(str(guid), permalink=True)
+    # Entry ID option 2: Use the URL as the ID. Also sets item.guid (non-permalink) for RSS.
+    else:
+        item.id(href)
 
     if author := metadata.get('author'):
         # author may be a str (in field list/frontmatter) or a dict (expected by feedgen)

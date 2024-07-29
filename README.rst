@@ -45,6 +45,8 @@ Features added
   - ``use_dirhtml`` to specify whether `dirhtml` instead of `html` builder is
     used when calculating the url
 
+  - ``feed_entry_permalink`` to set a permalink GUID for each feed entry
+
   - ``feed_use_atom`` to generate an Atom feed instead of RSS
 
 
